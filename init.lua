@@ -1,4 +1,4 @@
-vim.cmd.language('en_US')
+vim.cmd.language('en_US.UTF-8')
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
