@@ -31,6 +31,22 @@ opt.laststatus = 2
 opt.autoindent = true
 opt.breakindent = true
 
+-- Workaround for a faster startup when using clipboard='unnamedplus' on WSL
+if vim.fn.has('wsl') then
+    vim.g.clipboard = {
+       name = 'WslClipboard',
+       copy = {
+          ['+'] = 'clip.exe',
+          ['*'] = 'clip.exe',
+        },
+       paste = {
+          ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+          ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+       },
+       cache_enabled = 0,
+     }
+end
+
 opt.clipboard = 'unnamedplus'
 
 opt.undofile = true
